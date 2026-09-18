@@ -1,0 +1,304 @@
+/* Weather Log — clean, modern, responsive. Plain CSS, no frameworks. */
+
+:root {
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --ink: #1e293b;
+  --muted: #64748b;
+  --accent: #2563eb;
+  --accent-soft: #dbeafe;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --border: #e2e8f0;
+  --radius: 14px;
+  --shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  text-align: center;
+  padding: 2.5rem 1rem 1rem;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+}
+
+.wrap {
+  width: min(680px, 100%);
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+}
+
+.card h2 {
+  margin: 0 0 0.9rem;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+/* Search */
+.search-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input[type="text"],
+textarea {
+  font: inherit;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  width: 100%;
+  background: #fff;
+  color: var(--ink);
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: 2px solid var(--accent-soft);
+  border-color: var(--accent);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  font-weight: 600;
+  transition: background 0.15s ease, transform 0.05s ease;
+  white-space: nowrap;
+}
+
+button:hover { background: #1d4ed8; }
+button:active { transform: scale(0.98); }
+
+button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Status / error messages */
+.status {
+  margin: 0.6rem 0 0;
+  min-height: 1.25em;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.status.loading { color: var(--accent); }
+.status.error { color: var(--danger); }
+.status.ok { color: #15803d; }
+
+/* Current weather */
+.weather-now {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.weather-emoji {
+  font-size: 3.2rem;
+  line-height: 1;
+}
+
+.weather-facts p { margin: 0.15rem 0; }
+
+.temp {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.desc {
+  color: var(--muted);
+}
+
+.city-line { font-size: 0.95rem; }
+
+/* Mood picker */
+.mood-row {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.mood {
+  flex: 1;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 1.7rem;
+  padding: 0.5rem 0;
+  color: initial;
+}
+
+.mood:hover { background: var(--accent-soft); }
+
+.mood.selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.note-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+textarea {
+  resize: vertical;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+#log-btn { width: 100%; }
+
+/* Journal */
+.journal-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.journal-head h2 { margin: 0; }
+
+.count {
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: var(--bg);
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+}
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+  margin: 0.5rem 0;
+  padding: 1.5rem 1rem;
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+}
+
+.journal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.entry {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  background: #fff;
+}
+
+.entry:hover { border-color: #cbd5e1; }
+
+.entry-weather {
+  font-size: 2rem;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.entry-body { flex: 1; min-width: 0; }
+
+.entry-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  align-items: baseline;
+  margin-bottom: 0.25rem;
+}
+
+.entry-date { font-weight: 700; }
+.entry-city { color: var(--muted); font-size: 0.9rem; }
+.entry-mood { margin-left: auto; font-size: 1.15rem; }
+
+.entry-conditions { font-size: 0.95rem; }
+.entry-note {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+
+.entry-delete {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.entry-delete:hover {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.site-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 1.5rem 1rem;
+}
+
+.site-footer a { color: var(--accent); }
+
+/* Narrow screens */
+@media (max-width: 480px) {
+  .site-header { padding-top: 1.75rem; }
+  .site-header h1 { font-size: 1.6rem; }
+  .card { padding: 1rem; }
+  .search-row { flex-direction: column; }
+  .search-row button { width: 100%; }
+  .mood { font-size: 1.45rem; }
+  .weather-emoji { font-size: 2.6rem; }
+  .temp { font-size: 1.5rem; }
+}
