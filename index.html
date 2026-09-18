@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Weather Log — search any city, see its current weather, and log how the day felt.">
+  <title>Weather Log</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>🌦️ Weather Log</h1>
+    <p class="tagline">Check the sky, then jot down how the day felt.</p>
+  </header>
+
+  <main class="wrap">
+    <!-- City search -->
+    <section class="card" aria-labelledby="search-title">
+      <h2 id="search-title">1 · Find a city</h2>
+      <form id="search-form" class="search-row" autocomplete="off">
+        <input
+          type="text"
+          id="city-input"
+          placeholder="e.g. Austin"
+          aria-label="City name"
+          maxlength="80">
+        <button type="submit" id="search-btn">Search</button>
+      </form>
+      <p id="search-status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Current weather -->
+    <section class="card" id="weather-card" aria-labelledby="weather-title" hidden>
+      <h2 id="weather-title">2 · Right now</h2>
+      <div class="weather-now">
+        <div class="weather-emoji" id="weather-emoji" aria-hidden="true">—</div>
+        <div class="weather-facts">
+          <p class="temp"><span id="weather-temp">—</span> °C</p>
+          <p class="desc" id="weather-desc">—</p>
+          <p class="city-line">📍 <span id="weather-city">—</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Log entry -->
+    <section class="card" id="log-card" aria-labelledby="log-title" hidden>
+      <h2 id="log-title">3 · Log this day</h2>
+      <div class="mood-row" role="radiogroup" aria-label="Mood (1 to 5)">
+        <button type="button" class="mood" data-mood="1" role="radio" aria-checked="false" aria-label="Mood 1">😞</button>
+        <button type="button" class="mood" data-mood="2" role="radio" aria-checked="false" aria-label="Mood 2">😐</button>
+        <button type="button" class="mood" data-mood="3" role="radio" aria-checked="false" aria-label="Mood 3">🙂</button>
+        <button type="button" class="mood" data-mood="4" role="radio" aria-checked="false" aria-label="Mood 4">😊</button>
+        <button type="button" class="mood" data-mood="5" role="radio" aria-checked="false" aria-label="Mood 5">🤩</button>
+      </div>
+      <label class="note-label" for="note-input">Note (optional)</label>
+      <textarea
+        id="note-input"
+        rows="3"
+        maxlength="500"
+        placeholder="Rainy but cozy — great reading weather…"></textarea>
+      <button type="button" id="log-btn">Log this day ✍️</button>
+      <p id="log-status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Journal -->
+    <section class="card" aria-labelledby="journal-title">
+      <div class="journal-head">
+        <h2 id="journal-title">📓 Journal</h2>
+        <span id="journal-count" class="count"></span>
+      </div>
+      <p id="journal-empty" class="empty">
+        Nothing logged yet. Search a city above, check the weather, and log your first day.
+      </p>
+      <ul id="journal-list" class="journal-list"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Weather data by <a href="https://open-meteo.com/" rel="noopener">Open-Meteo</a> · Journal stored only in your browser (localStorage)</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
